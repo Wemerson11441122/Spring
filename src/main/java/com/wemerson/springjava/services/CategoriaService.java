@@ -1,5 +1,6 @@
 package com.wemerson.springjava.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,13 @@ public class CategoriaService {
 			   categoriaRepository.deleteById(id);	
 		} catch (DataIntegrityViolationException e) {
          throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
-		}
-     
-        }
+		}		}
+	
+	
+	public List<Categoria> findAll() {
+		return categoriaRepository.findAll();
+         }
+	
+	
 	
 }
