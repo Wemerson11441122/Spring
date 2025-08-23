@@ -14,8 +14,8 @@ public class CategoriaDTO  implements Serializable{
 	
 	private Integer id;
 	
-	@org.hibernate.validator.constraints.NotEmpty(message = "Preenchimento Obrigatorio")
-	@Length(min=5, max=80, message= "o tamanho deve ser entre 5 e 80  catacteres")
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres")
 	private String nome;
 	
 	public CategoriaDTO() {

@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
 
 import com.wemerson.springjava.domain.Categoria;
 import com.wemerson.springjava.dto.CategoriaDTO;
@@ -50,7 +51,7 @@ public class CategoriaService {
 		return categoriaRepository.findAll();
          }
 	
-	public org.springframework.data.domain.Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return categoriaRepository.findAll(pageRequest);
 	}
