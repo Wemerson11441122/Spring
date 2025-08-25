@@ -17,6 +17,7 @@ import com.wemerson.springjava.repositories.ClienteRepository;
 import com.wemerson.springjava.services.exceptions.DataIntegrityException;
 import com.wemerson.springjava.services.exceptions.ObjectNotFoundException;
 
+
 @Service
 public class ClienteService {
 
@@ -59,7 +60,7 @@ public class ClienteService {
 	
 	private void updateData(Cliente newObj, Cliente obj) {
 		newObj.setNome(obj.getNome());
-		newObj.setEmail(obj.getEmail());
+		newObj.setEmail(obj.getEmail());  
 	}
 
 }
