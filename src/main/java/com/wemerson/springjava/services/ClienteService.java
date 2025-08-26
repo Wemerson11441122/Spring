@@ -10,12 +10,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.wemerson.springjava.domain.Cidade;
 import com.wemerson.springjava.domain.Cliente;
-import com.wemerson.springjava.domain.Cliente;
+import com.wemerson.springjava.domain.Endereco;
+import com.wemerson.springjava.domain.enums.TipoCliente;
 import com.wemerson.springjava.dto.ClienteDTO;
+import com.wemerson.springjava.dto.ClienteNewDTO;
+import com.wemerson.springjava.repositories.CidadeRepository;
 import com.wemerson.springjava.repositories.ClienteRepository;
+import com.wemerson.springjava.repositories.EnderecoRepository;
 import com.wemerson.springjava.services.exceptions.DataIntegrityException;
 import com.wemerson.springjava.services.exceptions.ObjectNotFoundException;
+
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -24,11 +31,25 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
 	public Cliente find(Integer id) {
 		Optional<Cliente> obj = clienteRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
+	
+	@Transactional
+	public Cliente insert(Cliente obj) {
+		obj.setId(null);
+		obj =  clienteRepository.save(obj);
+		enderecoRepository.saveAll(obj.getEnderecos());
+		return obj;
+	}
+	
+	
 
 	public Cliente update(Cliente obj) {
 		Cliente newObj = find(obj.getId());
@@ -41,12 +62,7 @@ public class ClienteService {
 		try {
 			clienteRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-<<<<<<< HEAD
-			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
-=======
-			throw new DataIntegrityException("Não é possivel excluir porque há entidades relacionadas");
->>>>>>> 805f19c4176ca8d05ab0aee8fca10b28f97368dd
-		}
+			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos"); }
 	}
 
 	public List<Cliente> findAll() {
@@ -62,13 +78,23 @@ public class ClienteService {
 		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
 	}
 	
+	public Cliente fromDTO(ClienteNewDTO objDto) {
+		Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()));
+		Cidade cid = new Cidade(objDto.getCidadeId(), null, null);
+		Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), cli, cid);
+		cli.getEnderecos().add(end);
+		cli.getTelefones().add(objDto.getTelefone1());
+		if (objDto.getTelefone2()!=null) {
+			cli.getTelefones().add(objDto.getTelefone2());
+		}
+		if (objDto.getTelefone3()!=null) {
+			cli.getTelefones().add(objDto.getTelefone3());
+	}
+		return cli;
+	}
+	
 	private void updateData(Cliente newObj, Cliente obj) {
 		newObj.setNome(obj.getNome());
-<<<<<<< HEAD
-		newObj.setEmail(obj.getEmail());
-=======
-		newObj.setEmail(obj.getEmail());  
->>>>>>> 805f19c4176ca8d05ab0aee8fca10b28f97368dd
+		
 	}
-
 }
