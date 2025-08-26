@@ -61,6 +61,7 @@ public class CategoriaService {
 	public Categoria fromDTO(CategoriaDTO objDto) {
 		return new Categoria(objDto.getId(), objDto.getNome());
 	}
+<<<<<<< HEAD
 	
 	private void updateData(Categoria newObj, Categoria obj) {
 		newObj.setNome(obj.getNome());
@@ -71,6 +72,12 @@ public class CategoriaService {
 	
 	
 	
+=======
+	 
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
+	}
+>>>>>>> 805f19c4176ca8d05ab0aee8fca10b28f97368dd
 	
 
 }

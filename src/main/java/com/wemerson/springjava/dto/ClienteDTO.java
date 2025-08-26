@@ -9,10 +9,19 @@ import com.wemerson.springjava.domain.Cliente;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
+<<<<<<< HEAD
 public class ClienteDTO  implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 private Integer id;
+=======
+public class ClienteDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
+
+	
+	
+	private Integer id;
+>>>>>>> 805f19c4176ca8d05ab0aee8fca10b28f97368dd
 	
 	@NotEmpty(message="Preenchimento obrigatório")
 	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 80 caracteres")
@@ -63,4 +72,9 @@ private Integer id;
 	
 	
 	
+<<<<<<< HEAD
+=======
+	
+	
+>>>>>>> 805f19c4176ca8d05ab0aee8fca10b28f97368dd
 }

@@ -17,6 +17,7 @@ import com.wemerson.springjava.repositories.ClienteRepository;
 import com.wemerson.springjava.services.exceptions.DataIntegrityException;
 import com.wemerson.springjava.services.exceptions.ObjectNotFoundException;
 
+
 @Service
 public class ClienteService {
 
@@ -40,7 +41,11 @@ public class ClienteService {
 		try {
 			clienteRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
+<<<<<<< HEAD
 			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
+=======
+			throw new DataIntegrityException("Não é possivel excluir porque há entidades relacionadas");
+>>>>>>> 805f19c4176ca8d05ab0aee8fca10b28f97368dd
 		}
 	}
 
@@ -59,7 +64,11 @@ public class ClienteService {
 	
 	private void updateData(Cliente newObj, Cliente obj) {
 		newObj.setNome(obj.getNome());
+<<<<<<< HEAD
 		newObj.setEmail(obj.getEmail());
+=======
+		newObj.setEmail(obj.getEmail());  
+>>>>>>> 805f19c4176ca8d05ab0aee8fca10b28f97368dd
 	}
 
 }
